@@ -1,0 +1,233 @@
+openapi: 3.1.0
+info:
+  title: Samora AI Calls Webhooks API
+  version: '1.0'
+  description: Server-to-server REST API for Samora AI multilingual voice agents. Trigger outbound calls, manage outbound calling campaigns and their scheduled recipients, and subscribe to real-time call events via webhooks. These APIs are intended for server-to-server integrations; the organization API key must never be exposed in browser or mobile clients.
+  contact:
+    name: Samora AI API Support
+    email: vineeth@samora.ai
+    url: https://docs.samora.ai
+  x-provenance:
+    generated: '2026-07-21'
+    method: generated
+    source: https://docs.samora.ai
+    note: Faithfully constructed from the published Samora AI API reference at https://docs.samora.ai (no OpenAPI is published by the provider; /openapi.json returned 404). Paths, methods, auth, field names, limits and status/event enumerations are transcribed from the documentation, not invented.
+servers:
+- url: https://api.samora.ai
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Webhooks
+  description: Subscribe to real-time call events.
+paths:
+  /v2/webhooks:
+    post:
+      operationId: createWebhook
+      summary: Create a webhook
+      description: Create a webhook subscription. The response includes a signing secret used to verify webhook payload signatures.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequest'
+      responses:
+        '200':
+          description: Webhook created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: listWebhooks
+      summary: List webhooks
+      description: List webhook subscriptions.
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: A list of webhooks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v2/webhooks/events:
+    get:
+      operationId: listWebhookEvents
+      summary: List webhook event types
+      description: Get the list of webhook event types available for subscription.
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: Available webhook event types.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - CALL_STARTED
+                  - CALL_FINISHED
+                  - CALL_FAILED
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v2/webhooks/{webhook_id}:
+    get:
+      operationId: getWebhook
+      summary: Get a webhook
+      description: Get details for a specific webhook.
+      tags:
+      - Webhooks
+      parameters:
+      - $ref: '#/components/parameters/WebhookId'
+      responses:
+        '200':
+          description: Webhook details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateWebhook
+      summary: Update a webhook
+      description: Update a webhook subscription.
+      tags:
+      - Webhooks
+      parameters:
+      - $ref: '#/components/parameters/WebhookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequest'
+      responses:
+        '200':
+          description: Webhook updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteWebhook
+      summary: Delete a webhook
+      description: Delete a webhook subscription.
+      tags:
+      - Webhooks
+      parameters:
+      - $ref: '#/components/parameters/WebhookId'
+      responses:
+        '204':
+          description: Webhook deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Webhook:
+      type: object
+      properties:
+        webhook_id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - CALL_STARTED
+            - CALL_FINISHED
+            - CALL_FAILED
+        signing_secret:
+          type: string
+          description: Secret used to verify webhook payload signatures.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    CreateWebhookRequest:
+      type: object
+      required:
+      - url
+      - events
+      properties:
+        url:
+          type: string
+          format: uri
+          description: HTTPS endpoint that receives webhook deliveries.
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - CALL_STARTED
+            - CALL_FINISHED
+            - CALL_FAILED
+        data_options:
+          type: object
+          description: Controls which data fields are included in webhook payloads.
+          additionalProperties: true
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid X-API-Key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    WebhookId:
+      name: webhook_id
+      in: path
+      required: true
+      description: Unique identifier of the webhook.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Organization API key. Server-to-server only; never expose in browser or mobile clients.
