@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/samora-ai-openapi.yml
+skills:
+- file: samora-ai-outbound-call.md
+  name: Place and track an outbound Samora AI voice call
+  api: openapi/samora-ai-openapi.yml
+  operations: [triggerCall, getCall]
+- file: samora-ai-run-campaign.md
+  name: Run a Samora AI outbound calling campaign
+  api: openapi/samora-ai-openapi.yml
+  operations: [createCampaign, addScheduledCalls, startCampaign, listCampaignCalls, stopCampaign, cancelCampaign, getCampaign]
+- file: samora-ai-subscribe-webhooks.md
+  name: Subscribe to Samora AI call webhooks
+  api: openapi/samora-ai-openapi.yml
+  operations: [listWebhookEvents, createWebhook, getWebhook, listWebhooks, updateWebhook, deleteWebhook]

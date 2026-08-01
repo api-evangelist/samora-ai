@@ -1,0 +1,35 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/samora-ai-openapi.yml
+format: custom-json
+envelope:
+  fields: [error, message]
+  media_type: application/json
+  notes: >-
+    Samora AI does not document application/problem+json (RFC 9457). Errors are
+    returned as a JSON object with error/message fields. Problem entries below
+    are derived from the documented HTTP response codes.
+problems:
+- status: 400
+  title: Bad Request
+  remediation: Validate request body/fields (E.164 numbers, campaign_name <= 120 chars, retry_config bounds).
+  source_operations: [triggerCall, createCampaign, updateCampaign, addScheduledCalls, createWebhook, updateWebhook]
+- status: 401
+  title: Unauthorized
+  remediation: Provide a valid organization API key in the X-API-Key header.
+  source_operations: [all]
+- status: 404
+  title: Not Found
+  remediation: Verify the call_id / campaign_id / webhook_id exists.
+  source_operations: [getCall, getCampaign, updateCampaign, getWebhook, updateWebhook, deleteWebhook]
+- status: 409
+  title: Invalid State Transition
+  remediation: >-
+    The campaign is in a state that does not permit this operation. Add
+    recipients/start only from DRAFT or PAUSED; stop only from IN_PROGRESS;
+    cancel only from a non-terminal state.
+  source_operations: [addScheduledCalls, startCampaign, stopCampaign, cancelCampaign]
+- status: 429
+  title: Too Many Requests
+  remediation: Back off and retry; respect documented rate limits and the 2 MiB request-body cap.
+  source_operations: [triggerCall]

@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/samora-ai-openapi.yml
+standards:
+- id: oauth2
+  conforms: false
+  evidence: API uses X-API-Key header auth, not OAuth2.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom {error, message} JSON envelope, not application/problem+json.
+- id: rfc8594-sunset-header
+  conforms: false
+- id: e164-phone-numbers
+  conforms: true
+  evidence: Destination numbers are required in E.164 format.
+- id: webhook-signature-verification
+  conforms: true
+  evidence: Webhook subscriptions issue a signing secret for payload signature verification.
+- id: asyncapi
+  conforms: true
+  evidence: Documented webhook event surface (CALL_STARTED/CALL_FINISHED/CALL_FAILED); AsyncAPI derived in asyncapi/.
+notes: >-
+  No published compliance certifications (SOC 2, ISO 27001, PCI, HIPAA, GDPR)
+  were found for Samora AI, so no Compliance pointer is emitted.

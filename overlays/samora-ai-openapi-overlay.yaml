@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Samora AI
+  version: 1.0.0
+extends: openapi/samora-ai-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-rating: 3
+    x-apievangelist-notes: >-
+      Server-to-server voice-agent API with a clear webhook event surface. No
+      published OpenAPI, SDKs, status page, or OAuth; API-key auth only.
+- target: $.info
+  update:
+    x-artifacts:
+      authentication: authentication/samora-ai-authentication.yml
+      conventions: conventions/samora-ai-conventions.yml
+      errors: errors/samora-ai-problem-types.yml
+      lifecycle: lifecycle/samora-ai-lifecycle.yml
+      webhooks: asyncapi/samora-ai-webhooks-asyncapi.yml
+      mcp: mcp/samora-ai-mcp.yml
+      data_model: data-model/samora-ai-data-model.yml

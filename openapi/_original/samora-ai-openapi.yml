@@ -1,0 +1,596 @@
+openapi: 3.1.0
+info:
+  title: Samora AI API
+  version: '1.0'
+  description: >-
+    Server-to-server REST API for Samora AI multilingual voice agents. Trigger
+    outbound calls, manage outbound calling campaigns and their scheduled
+    recipients, and subscribe to real-time call events via webhooks. These APIs
+    are intended for server-to-server integrations; the organization API key
+    must never be exposed in browser or mobile clients.
+  contact:
+    name: Samora AI API Support
+    email: vineeth@samora.ai
+    url: https://docs.samora.ai
+  x-provenance:
+    generated: '2026-07-21'
+    method: generated
+    source: https://docs.samora.ai
+    note: >-
+      Faithfully constructed from the published Samora AI API reference at
+      https://docs.samora.ai (no OpenAPI is published by the provider; /openapi.json
+      returned 404). Paths, methods, auth, field names, limits and status/event
+      enumerations are transcribed from the documentation, not invented.
+servers:
+  - url: https://api.samora.ai
+    description: Production
+tags:
+  - name: Calls
+    description: Trigger and retrieve individual outbound calls.
+  - name: Campaigns
+    description: Create and manage outbound calling campaigns and their scheduled recipients.
+  - name: Webhooks
+    description: Subscribe to real-time call events.
+security:
+  - ApiKeyAuth: []
+paths:
+  /v1/call/trigger:
+    post:
+      operationId: triggerCall
+      summary: Trigger an outbound call
+      description: Initiate an outbound call from a voice agent to a phone number.
+      tags: [Calls]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerCallRequest'
+      responses:
+        '200':
+          description: Call created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /v1/call/{call_id}:
+    get:
+      operationId: getCall
+      summary: Get a call
+      description: Get details for a specific call, including status and presigned transcript/recording URLs.
+      tags: [Calls]
+      parameters:
+        - $ref: '#/components/parameters/CallId'
+      responses:
+        '200':
+          description: Call details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/external/campaigns/{agent_id}:
+    post:
+      operationId: createCampaign
+      summary: Create a campaign
+      description: Create an outbound calling campaign for an agent.
+      tags: [Campaigns]
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCampaignRequest'
+      responses:
+        '200':
+          description: Campaign created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: listCampaigns
+      summary: List campaigns
+      description: List campaigns for an agent.
+      tags: [Campaigns]
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+        - name: page_size
+          in: query
+          description: Number of campaigns per page (max 100).
+          schema:
+            type: integer
+            maximum: 100
+      responses:
+        '200':
+          description: A page of campaigns.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Campaign'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/external/campaigns/{agent_id}/{campaign_id}:
+    get:
+      operationId: getCampaign
+      summary: Get a campaign
+      description: Get details for a specific campaign.
+      tags: [Campaigns]
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+        - $ref: '#/components/parameters/CampaignId'
+      responses:
+        '200':
+          description: Campaign details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateCampaign
+      summary: Update a campaign
+      description: Update campaign settings.
+      tags: [Campaigns]
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+        - $ref: '#/components/parameters/CampaignId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCampaignRequest'
+      responses:
+        '200':
+          description: Campaign updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/external/campaigns/{agent_id}/{campaign_id}/scheduled-calls:
+    post:
+      operationId: addScheduledCalls
+      summary: Add recipients to a campaign
+      description: >-
+        Add scheduled-call recipients to a campaign. Up to 5000 numbers per
+        request, with up to 4 KiB of call_variables per number. Only allowed
+        while the campaign is in DRAFT or PAUSED status.
+      tags: [Campaigns]
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+        - $ref: '#/components/parameters/CampaignId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddScheduledCallsRequest'
+      responses:
+        '200':
+          description: Recipients added.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /v1/external/campaigns/{agent_id}/{campaign_id}/calls:
+    get:
+      operationId: listCampaignCalls
+      summary: List campaign calls
+      description: List the calls belonging to a campaign.
+      tags: [Campaigns]
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+        - $ref: '#/components/parameters/CampaignId'
+        - name: page_size
+          in: query
+          description: Number of calls per page (max 100).
+          schema:
+            type: integer
+            maximum: 100
+      responses:
+        '200':
+          description: A page of campaign calls.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Call'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/external/campaigns/{agent_id}/{campaign_id}/start:
+    post:
+      operationId: startCampaign
+      summary: Start a campaign
+      description: Start a campaign. Allowed from DRAFT or PAUSED status.
+      tags: [Campaigns]
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+        - $ref: '#/components/parameters/CampaignId'
+      responses:
+        '200':
+          description: Campaign started.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /v1/external/campaigns/{agent_id}/{campaign_id}/stop:
+    post:
+      operationId: stopCampaign
+      summary: Stop a campaign
+      description: Stop a campaign. Allowed only from IN_PROGRESS status.
+      tags: [Campaigns]
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+        - $ref: '#/components/parameters/CampaignId'
+      responses:
+        '200':
+          description: Campaign stopped.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /v1/external/campaigns/{agent_id}/{campaign_id}/cancel:
+    post:
+      operationId: cancelCampaign
+      summary: Cancel a campaign
+      description: Cancel a campaign. Allowed unless the campaign is already in a terminal state.
+      tags: [Campaigns]
+      parameters:
+        - $ref: '#/components/parameters/AgentId'
+        - $ref: '#/components/parameters/CampaignId'
+      responses:
+        '200':
+          description: Campaign cancelled.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /v2/webhooks:
+    post:
+      operationId: createWebhook
+      summary: Create a webhook
+      description: >-
+        Create a webhook subscription. The response includes a signing secret
+        used to verify webhook payload signatures.
+      tags: [Webhooks]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequest'
+      responses:
+        '200':
+          description: Webhook created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: listWebhooks
+      summary: List webhooks
+      description: List webhook subscriptions.
+      tags: [Webhooks]
+      responses:
+        '200':
+          description: A list of webhooks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v2/webhooks/events:
+    get:
+      operationId: listWebhookEvents
+      summary: List webhook event types
+      description: Get the list of webhook event types available for subscription.
+      tags: [Webhooks]
+      responses:
+        '200':
+          description: Available webhook event types.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum: [CALL_STARTED, CALL_FINISHED, CALL_FAILED]
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v2/webhooks/{webhook_id}:
+    get:
+      operationId: getWebhook
+      summary: Get a webhook
+      description: Get details for a specific webhook.
+      tags: [Webhooks]
+      parameters:
+        - $ref: '#/components/parameters/WebhookId'
+      responses:
+        '200':
+          description: Webhook details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateWebhook
+      summary: Update a webhook
+      description: Update a webhook subscription.
+      tags: [Webhooks]
+      parameters:
+        - $ref: '#/components/parameters/WebhookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequest'
+      responses:
+        '200':
+          description: Webhook updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteWebhook
+      summary: Delete a webhook
+      description: Delete a webhook subscription.
+      tags: [Webhooks]
+      parameters:
+        - $ref: '#/components/parameters/WebhookId'
+      responses:
+        '204':
+          description: Webhook deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Organization API key. Server-to-server only; never expose in browser or mobile clients.
+  parameters:
+    CallId:
+      name: call_id
+      in: path
+      required: true
+      description: Unique identifier of the call.
+      schema:
+        type: string
+        format: uuid
+    AgentId:
+      name: agent_id
+      in: path
+      required: true
+      description: Unique identifier of the voice agent.
+      schema:
+        type: string
+        format: uuid
+    CampaignId:
+      name: campaign_id
+      in: path
+      required: true
+      description: Unique identifier of the campaign.
+      schema:
+        type: string
+        format: uuid
+    WebhookId:
+      name: webhook_id
+      in: path
+      required: true
+      description: Unique identifier of the webhook.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid X-API-Key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: The resource is in a state that does not permit this operation (invalid state transition).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    TriggerCallRequest:
+      type: object
+      required: [agent_id, to_number]
+      properties:
+        agent_id:
+          type: string
+          format: uuid
+          description: The voice agent placing the call.
+        to_number:
+          type: string
+          description: Destination phone number in E.164 format (e.g. +919876543210).
+    Call:
+      type: object
+      properties:
+        call_id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/CallStatus'
+        transcript_url:
+          type: string
+          format: uri
+          description: Presigned transcript URL, valid for 60 minutes.
+        recording_url:
+          type: string
+          format: uri
+          description: Presigned recording URL, valid for 60 minutes.
+    CallStatus:
+      type: string
+      enum: [PENDING, TRIGGERED, ONGOING, CALL_FINISHED, UNANSWERED, REJECTED]
+    CreateCampaignRequest:
+      type: object
+      required: [campaign_name]
+      properties:
+        campaign_name:
+          type: string
+          maxLength: 120
+        retry_config:
+          $ref: '#/components/schemas/RetryConfig'
+    RetryConfig:
+      type: object
+      properties:
+        max_retries:
+          type: integer
+          minimum: 1
+          maximum: 5
+        retry_delay_minutes:
+          type: integer
+          minimum: 1
+          maximum: 1440
+        retry_on:
+          type: array
+          items:
+            type: string
+            enum: [UNANSWERED, REJECTED, VOICEMAIL, FAILED]
+    Campaign:
+      type: object
+      properties:
+        campaign_id:
+          type: string
+          format: uuid
+        campaign_name:
+          type: string
+        status:
+          $ref: '#/components/schemas/CampaignStatus'
+        retry_config:
+          $ref: '#/components/schemas/RetryConfig'
+    CampaignStatus:
+      type: string
+      enum: [DRAFT, SCHEDULED, IN_PROGRESS, PAUSED, FINISHED, FAILED, CANCELLED]
+    AddScheduledCallsRequest:
+      type: object
+      required: [recipients]
+      properties:
+        recipients:
+          type: array
+          maxItems: 5000
+          items:
+            type: object
+            required: [to_number]
+            properties:
+              to_number:
+                type: string
+                description: Destination phone number in E.164 format.
+              call_variables:
+                type: object
+                description: Per-recipient variables, up to 4 KiB per number.
+                additionalProperties: true
+    CreateWebhookRequest:
+      type: object
+      required: [url, events]
+      properties:
+        url:
+          type: string
+          format: uri
+          description: HTTPS endpoint that receives webhook deliveries.
+        events:
+          type: array
+          items:
+            type: string
+            enum: [CALL_STARTED, CALL_FINISHED, CALL_FAILED]
+        data_options:
+          type: object
+          description: Controls which data fields are included in webhook payloads.
+          additionalProperties: true
+    Webhook:
+      type: object
+      properties:
+        webhook_id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+            enum: [CALL_STARTED, CALL_FINISHED, CALL_FAILED]
+        signing_secret:
+          type: string
+          description: Secret used to verify webhook payload signatures.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string

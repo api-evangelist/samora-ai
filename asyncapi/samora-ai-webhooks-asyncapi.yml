@@ -1,0 +1,83 @@
+asyncapi: 3.0.0
+info:
+  title: Samora AI Webhooks
+  version: '2.0'
+  description: >-
+    Real-time call events delivered by Samora AI to a subscriber-provided HTTPS
+    endpoint. Subscriptions are managed via the REST /v2/webhooks operations;
+    each subscription returns a signing secret used to verify payload signatures.
+  x-provenance:
+    generated: '2026-07-21'
+    method: generated
+    source: https://docs.samora.ai
+    note: >-
+      Derived from the documented Samora AI webhook surface (event types and
+      management endpoints). Payload field schemas beyond the documented values
+      are not asserted.
+defaultContentType: application/json
+servers:
+  subscriber:
+    host: your-endpoint.example.com
+    protocol: https
+    description: Subscriber-hosted HTTPS endpoint registered via POST /v2/webhooks.
+channels:
+  callEvents:
+    address: /
+    description: The subscriber endpoint that receives Samora AI call event deliveries.
+    messages:
+      callStarted:
+        $ref: '#/components/messages/CallStarted'
+      callFinished:
+        $ref: '#/components/messages/CallFinished'
+      callFailed:
+        $ref: '#/components/messages/CallFailed'
+operations:
+  receiveCallEvent:
+    action: receive
+    channel:
+      $ref: '#/channels/callEvents'
+    messages:
+      - $ref: '#/channels/callEvents/messages/callStarted'
+      - $ref: '#/channels/callEvents/messages/callFinished'
+      - $ref: '#/channels/callEvents/messages/callFailed'
+components:
+  messages:
+    CallStarted:
+      name: CALL_STARTED
+      title: Call started
+      summary: Emitted when a call begins.
+      payload:
+        $ref: '#/components/schemas/CallEvent'
+    CallFinished:
+      name: CALL_FINISHED
+      title: Call finished
+      summary: Emitted when a call ends; transcript and recording become available.
+      payload:
+        $ref: '#/components/schemas/CallEvent'
+    CallFailed:
+      name: CALL_FAILED
+      title: Call failed
+      summary: Emitted when a call fails, is rejected, or is unanswered.
+      payload:
+        $ref: '#/components/schemas/CallEvent'
+  schemas:
+    CallEvent:
+      type: object
+      properties:
+        event:
+          type: string
+          enum: [CALL_STARTED, CALL_FINISHED, CALL_FAILED]
+        call_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [PENDING, TRIGGERED, ONGOING, CALL_FINISHED, UNANSWERED, REJECTED]
+        transcript_url:
+          type: string
+          format: uri
+          description: Present on CALL_FINISHED; presigned, valid 60 minutes.
+        recording_url:
+          type: string
+          format: uri
+          description: Present on CALL_FINISHED; presigned, valid 60 minutes.

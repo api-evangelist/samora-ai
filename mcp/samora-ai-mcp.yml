@@ -1,0 +1,63 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/samora-ai-openapi.yml
+note: >-
+  No official Samora AI MCP server was found. This is a candidate tool list
+  derived one-to-one from the documented REST operations, as a starting point
+  for an MCP wrapper. Auth would map the organization X-API-Key.
+server:
+  name: samora-ai
+  transport: http
+tools:
+- name: trigger_call
+  description: Trigger an outbound voice-agent call to an E.164 number.
+  source_operation: openapi/samora-ai-openapi.yml#triggerCall
+- name: get_call
+  description: Get a call's status and presigned transcript/recording URLs.
+  source_operation: openapi/samora-ai-openapi.yml#getCall
+- name: create_campaign
+  description: Create an outbound calling campaign for an agent.
+  source_operation: openapi/samora-ai-openapi.yml#createCampaign
+- name: list_campaigns
+  description: List an agent's campaigns.
+  source_operation: openapi/samora-ai-openapi.yml#listCampaigns
+- name: get_campaign
+  description: Get campaign details.
+  source_operation: openapi/samora-ai-openapi.yml#getCampaign
+- name: update_campaign
+  description: Update campaign settings.
+  source_operation: openapi/samora-ai-openapi.yml#updateCampaign
+- name: add_scheduled_calls
+  description: Add up to 5000 recipients to a DRAFT or PAUSED campaign.
+  source_operation: openapi/samora-ai-openapi.yml#addScheduledCalls
+- name: list_campaign_calls
+  description: List the calls in a campaign.
+  source_operation: openapi/samora-ai-openapi.yml#listCampaignCalls
+- name: start_campaign
+  description: Start a campaign (from DRAFT or PAUSED).
+  source_operation: openapi/samora-ai-openapi.yml#startCampaign
+- name: stop_campaign
+  description: Stop an IN_PROGRESS campaign.
+  source_operation: openapi/samora-ai-openapi.yml#stopCampaign
+- name: cancel_campaign
+  description: Cancel a non-terminal campaign.
+  source_operation: openapi/samora-ai-openapi.yml#cancelCampaign
+- name: create_webhook
+  description: Create a webhook subscription and receive a signing secret.
+  source_operation: openapi/samora-ai-openapi.yml#createWebhook
+- name: list_webhooks
+  description: List webhook subscriptions.
+  source_operation: openapi/samora-ai-openapi.yml#listWebhooks
+- name: list_webhook_events
+  description: List available webhook event types.
+  source_operation: openapi/samora-ai-openapi.yml#listWebhookEvents
+- name: get_webhook
+  description: Get a webhook's details.
+  source_operation: openapi/samora-ai-openapi.yml#getWebhook
+- name: update_webhook
+  description: Update a webhook subscription.
+  source_operation: openapi/samora-ai-openapi.yml#updateWebhook
+- name: delete_webhook
+  description: Delete a webhook subscription.
+  source_operation: openapi/samora-ai-openapi.yml#deleteWebhook

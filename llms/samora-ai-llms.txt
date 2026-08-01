@@ -1,0 +1,24 @@
+# Samora AI
+
+> Samora AI builds multilingual voice agents that automate high-volume inbound and outbound calling. Its server-to-server REST API triggers outbound calls, manages outbound calling campaigns and scheduled recipients, and delivers real-time call events via signed webhooks. Authentication is an organization API key sent in the X-API-Key header. Base URL: https://api.samora.ai.
+
+## APIs
+
+- [Samora AI API docs](https://docs.samora.ai): Calls, Campaigns, and Webhooks reference.
+- [OpenAPI (API Evangelist generated)](https://raw.githubusercontent.com/api-evangelist/samora-ai/refs/heads/main/openapi/samora-ai-openapi.yml)
+
+## Specs and artifacts
+
+- [Webhooks AsyncAPI](https://raw.githubusercontent.com/api-evangelist/samora-ai/refs/heads/main/asyncapi/samora-ai-webhooks-asyncapi.yml)
+- [Authentication](https://raw.githubusercontent.com/api-evangelist/samora-ai/refs/heads/main/authentication/samora-ai-authentication.yml)
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/samora-ai/refs/heads/main/conventions/samora-ai-conventions.yml)
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/samora-ai/refs/heads/main/errors/samora-ai-problem-types.yml)
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/samora-ai/refs/heads/main/lifecycle/samora-ai-lifecycle.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/samora-ai/refs/heads/main/data-model/samora-ai-data-model.yml)
+- [MCP tool candidates](https://raw.githubusercontent.com/api-evangelist/samora-ai/refs/heads/main/mcp/samora-ai-mcp.yml)
+
+## Docs
+
+- [Samora AI website](https://samora.ai)
+- [Application login](https://app.samora.ai/login)
+- [Y Combinator profile](https://www.ycombinator.com/companies/samora-ai)

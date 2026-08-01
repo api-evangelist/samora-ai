@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.samora.ai
+versioning:
+  scheme: uri-path
+  current: v2
+  versions: [v1, v2]
+  docs: https://docs.samora.ai
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No published deprecation policy or RFC 8594 Sunset/Deprecation header support was found.
+sla:
+  url: null
+  uptime_target: '99.99%'
+  notes: The marketing site advertises 99.99% uptime; no formal SLA document was located.
+status_page: null
+deprecated_operations: []
+notes: >-
+  No public status page and no formal deprecation policy were found for Samora AI.
+  Versioning is via URI path (v1 for calls/campaigns, v2 for webhooks).

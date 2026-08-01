@@ -1,0 +1,18 @@
+{
+  "provider": "samora-ai",
+  "sources": [
+    "samora-ai-calls-api-openapi.yml",
+    "samora-ai-campaigns-api-openapi.yml",
+    "samora-ai-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "samora-ai-calls-api-openapi.yml",
+    "samora-ai-campaigns-api-openapi.yml",
+    "samora-ai-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,47 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.samora.ai
+authentication:
+  style: api-key
+  header: X-API-Key
+  notes: Organization API key; server-to-server only, never exposed in browser/mobile clients.
+  ref: authentication/samora-ai-authentication.yml
+pagination:
+  style: page-size
+  params:
+  - name: page_size
+    in: query
+    max: 100
+versioning:
+  style: uri-path
+  versions:
+  - v1
+  - v2
+  notes: Calls and campaigns are under /v1; webhooks are under /v2.
+idempotency:
+  supported: false
+  notes: No idempotency-key mechanism is documented.
+webhook_verification:
+  supported: true
+  mechanism: signing-secret
+  notes: >-
+    Webhook creation returns a signing secret used to verify webhook payload
+    signatures. Event types CALL_STARTED, CALL_FINISHED, CALL_FAILED.
+retries:
+  supported: true
+  scope: campaign
+  config:
+    max_retries: 1-5
+    retry_delay_minutes: 1-1440
+    retry_on: [UNANSWERED, REJECTED, VOICEMAIL, FAILED]
+rate_limiting:
+  documented: true
+  signal: HTTP 429
+  request_body_max: 2 MiB
+  notes: Per-request caps are documented (page_size max 100; up to 5000 recipients per add; 4 KiB call_variables per recipient).
+presigned_urls:
+  transcript_recording_ttl_minutes: 60
+error_envelope:
+  ref: errors/samora-ai-problem-types.yml
+lifecycle:
+  ref: lifecycle/samora-ai-lifecycle.yml

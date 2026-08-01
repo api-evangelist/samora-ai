@@ -1,0 +1,17 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/samora-ai-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  description: Organization API key. Server-to-server only; never expose in browser or mobile
+    clients.
+  sources:
+  - openapi/samora-ai-openapi.yml
