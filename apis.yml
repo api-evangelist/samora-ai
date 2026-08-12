@@ -110,7 +110,7 @@ common:
 - type: Support
   url: https://cal.com/team/samora/quick-chat
 - type: OpenAPI
-  url: openapi/samora-ai-openapi.yml
+  url: openapi/_original/samora-ai-openapi.yml
 - type: Authentication
   url: authentication/samora-ai-authentication.yml
 - type: AgenticAccess
