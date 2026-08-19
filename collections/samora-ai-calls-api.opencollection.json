@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Samora AI Calls API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Calls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Trigger an outbound call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.samora.ai/v1/call/trigger",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate an outbound call from a voice agent to a phone number."
+        },
+        {
+          "info": {
+            "name": "Get a call",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.samora.ai/v1/call/:call_id",
+            "params": [
+              {
+                "name": "call_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the call."
+              }
+            ]
+          },
+          "docs": "Get details for a specific call, including status and presigned transcript/recording URLs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

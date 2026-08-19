@@ -1,0 +1,2318 @@
+{
+  "item": [
+    {
+      "id": "cf57bbb6-eec7-4c8a-a078-cc44a2c1c22a",
+      "name": "Campaigns",
+      "description": {
+        "content": "Create and manage outbound calling campaigns and their scheduled recipients.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e4c3dff5-a200-4872-86b4-20e811f3d394",
+          "name": "Create a campaign",
+          "request": {
+            "name": "Create a campaign",
+            "description": {
+              "content": "Create an outbound calling campaign for an agent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "campaigns",
+                ":agent_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Unique identifier of the voice agent."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"campaign_name\": \"<string>\",\n  \"retry_config\": {\n    \"max_retries\": \"<integer>\",\n    \"retry_delay_minutes\": \"<integer>\",\n    \"retry_on\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9afeb877-2c91-4896-8c9b-d2e866aea2f1",
+              "name": "Campaign created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_name\": \"<string>\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 447,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"VOICEMAIL\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"campaign_id\": \"3b1beb28-b1d1-a64e-5850-75e93055d446\",\n  \"campaign_name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 1042,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"UNANSWERED\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c44660f-5d58-4e2b-955f-d8ea0031804c",
+              "name": "The request was malformed or failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_name\": \"<string>\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 447,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"VOICEMAIL\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c67b1748-f989-4175-8e6e-decc8ebc116f",
+              "name": "Missing or invalid X-API-Key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_name\": \"<string>\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 447,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"VOICEMAIL\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3273a6a7-668b-431b-a985-515233a655a3",
+          "name": "List campaigns",
+          "request": {
+            "name": "List campaigns",
+            "description": {
+              "content": "List campaigns for an agent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "campaigns",
+                ":agent_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of campaigns per page (max 100)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Unique identifier of the voice agent."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82a14f77-33a7-491d-964c-07b0f91395ff",
+              "name": "A page of campaigns.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"campaign_id\": \"303abaa1-6c45-abba-49cf-1644f2984bcc\",\n    \"campaign_name\": \"string\",\n    \"status\": \"IN_PROGRESS\",\n    \"retry_config\": {\n      \"max_retries\": 4,\n      \"retry_delay_minutes\": 132,\n      \"retry_on\": [\n        \"FAILED\",\n        \"UNANSWERED\"\n      ]\n    }\n  },\n  {\n    \"campaign_id\": \"b5a3e103-d7b2-9dd4-2a78-3dc66ad3ed57\",\n    \"campaign_name\": \"string\",\n    \"status\": \"IN_PROGRESS\",\n    \"retry_config\": {\n      \"max_retries\": 1,\n      \"retry_delay_minutes\": 1252,\n      \"retry_on\": [\n        \"FAILED\",\n        \"REJECTED\"\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b41ea2ea-f484-4e0b-a18c-e5b2b706c920",
+              "name": "Missing or invalid X-API-Key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dda330af-f033-462e-81a1-8daf51415173",
+          "name": "Get a campaign",
+          "request": {
+            "name": "Get a campaign",
+            "description": {
+              "content": "Get details for a specific campaign.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "campaigns",
+                ":agent_id",
+                ":campaign_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Unique identifier of the voice agent."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "campaign_id",
+                  "description": "(Required) Unique identifier of the campaign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "deedd348-b939-4393-a55a-0bf8c6ac33ed",
+              "name": "Campaign details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"campaign_id\": \"3b1beb28-b1d1-a64e-5850-75e93055d446\",\n  \"campaign_name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 1042,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"UNANSWERED\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e168f31-e41e-4027-9bb4-4a7f95626476",
+              "name": "Missing or invalid X-API-Key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8adc23f5-0bd3-47c9-92cf-065cd15a443d",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7818baa7-4730-4c0e-8bb4-ea4ea9f37fc7",
+          "name": "Update a campaign",
+          "request": {
+            "name": "Update a campaign",
+            "description": {
+              "content": "Update campaign settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "campaigns",
+                ":agent_id",
+                ":campaign_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Unique identifier of the voice agent."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "campaign_id",
+                  "description": "(Required) Unique identifier of the campaign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"campaign_name\": \"<string>\",\n  \"retry_config\": {\n    \"max_retries\": \"<integer>\",\n    \"retry_delay_minutes\": \"<integer>\",\n    \"retry_on\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71067875-49b5-4eaf-b82b-775276f08a51",
+              "name": "Campaign updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_name\": \"<string>\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 447,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"VOICEMAIL\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"campaign_id\": \"3b1beb28-b1d1-a64e-5850-75e93055d446\",\n  \"campaign_name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 1042,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"UNANSWERED\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9a39384-f204-4153-ac64-3946e449338b",
+              "name": "The request was malformed or failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_name\": \"<string>\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 447,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"VOICEMAIL\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3bd6184-1409-44e4-a9ef-a02ecff3bf3b",
+              "name": "Missing or invalid X-API-Key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_name\": \"<string>\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 447,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"VOICEMAIL\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "165b2afd-bfd9-4324-9081-60c4c9e84161",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_name\": \"<string>\",\n  \"retry_config\": {\n    \"max_retries\": 1,\n    \"retry_delay_minutes\": 447,\n    \"retry_on\": [\n      \"REJECTED\",\n      \"VOICEMAIL\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6458244a-f171-4587-a170-8945273a4a7f",
+          "name": "Add recipients to a campaign",
+          "request": {
+            "name": "Add recipients to a campaign",
+            "description": {
+              "content": "Add scheduled-call recipients to a campaign. Up to 5000 numbers per request, with up to 4 KiB of call_variables per number. Only allowed while the campaign is in DRAFT or PAUSED status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "campaigns",
+                ":agent_id",
+                ":campaign_id",
+                "scheduled-calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Unique identifier of the voice agent."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "campaign_id",
+                  "description": "(Required) Unique identifier of the campaign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipients\": [\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": 8065,\n        \"key_1\": 5980.822002533138\n      }\n    },\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": 2295.969855235791,\n        \"key_1\": \"string\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "375779cc-28f9-4b69-94a8-1250233d3042",
+              "name": "Recipients added.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "scheduled-calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipients\": [\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": \"string\",\n        \"key_1\": 263.4656567662397\n      }\n    },\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": true,\n        \"key_1\": 3592\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a0a1ef9d-bfd7-4843-a9fa-520b51b6250d",
+              "name": "The request was malformed or failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "scheduled-calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipients\": [\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": \"string\",\n        \"key_1\": 263.4656567662397\n      }\n    },\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": true,\n        \"key_1\": 3592\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b87432d-5efe-4693-a1f1-8278268921e4",
+              "name": "Missing or invalid X-API-Key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "scheduled-calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipients\": [\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": \"string\",\n        \"key_1\": 263.4656567662397\n      }\n    },\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": true,\n        \"key_1\": 3592\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "379f6e79-0ce5-4120-af55-d27a5ac8abac",
+              "name": "The resource is in a state that does not permit this operation (invalid state transition).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "scheduled-calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipients\": [\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": \"string\",\n        \"key_1\": 263.4656567662397\n      }\n    },\n    {\n      \"to_number\": \"<string>\",\n      \"call_variables\": {\n        \"key_0\": true,\n        \"key_1\": 3592\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5e7be3c-9463-4d04-b051-c9c8e2ea0000",
+          "name": "List campaign calls",
+          "request": {
+            "name": "List campaign calls",
+            "description": {
+              "content": "List the calls belonging to a campaign.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "campaigns",
+                ":agent_id",
+                ":campaign_id",
+                "calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of calls per page (max 100)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Unique identifier of the voice agent."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "campaign_id",
+                  "description": "(Required) Unique identifier of the campaign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2619610-f45b-4ef6-a178-fbf9566e37ef",
+              "name": "A page of campaign calls.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"call_id\": \"f0b9d8b1-96e4-11c6-1d0a-f746e3f13292\",\n    \"status\": \"TRIGGERED\",\n    \"transcript_url\": \"https://W.oeixp4xeOK1yaNZqj0yU,zfSYJU.lkXocBK2CWbqCxU9QJ\",\n    \"recording_url\": \"http://jEEndscFSqZXFudiItwdAZJbLUNzlVF.aveyiRwXfS9Vhbe1\"\n  },\n  {\n    \"call_id\": \"fa7536ab-c024-6c2e-f15e-7316cdb83489\",\n    \"status\": \"REJECTED\",\n    \"transcript_url\": \"http://Lltrmz.gynRztYKj6Qfqw4EzepuoCQPAy4+xk.rlbADUgWn1MHrOd4b\",\n    \"recording_url\": \"https://ew.zquRH.KPOfqX0Sp1EV.WUecGYIP4KlcfMbVAMa+HbhO49hhK+JVyb7tu5T,fTl\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c4ee0e3-489e-4390-926b-89eda7392d02",
+              "name": "Missing or invalid X-API-Key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "486a288f-af4c-4c0d-9fa4-4a950cc137dc",
+          "name": "Start a campaign",
+          "request": {
+            "name": "Start a campaign",
+            "description": {
+              "content": "Start a campaign. Allowed from DRAFT or PAUSED status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "campaigns",
+                ":agent_id",
+                ":campaign_id",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Unique identifier of the voice agent."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "campaign_id",
+                  "description": "(Required) Unique identifier of the campaign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8cacb156-4202-46ec-a918-ee9680cafb57",
+              "name": "Campaign started.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b8f85734-df19-4267-9e92-6e7181974d2a",
+              "name": "Missing or invalid X-API-Key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed0d8909-837a-43f1-95ec-3551d1709510",
+              "name": "The resource is in a state that does not permit this operation (invalid state transition).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fdf6d14-f00d-4f7d-ab83-096b86cc03f1",
+          "name": "Stop a campaign",
+          "request": {
+            "name": "Stop a campaign",
+            "description": {
+              "content": "Stop a campaign. Allowed only from IN_PROGRESS status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "campaigns",
+                ":agent_id",
+                ":campaign_id",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Unique identifier of the voice agent."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "campaign_id",
+                  "description": "(Required) Unique identifier of the campaign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2bdfc5a-138b-43cf-bfa7-4def78d75f1c",
+              "name": "Campaign stopped.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c65de32-1d0b-4a87-81da-9dab5f6b988d",
+              "name": "Missing or invalid X-API-Key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35fcbf97-8d6d-430b-8099-13112c1aaa2b",
+              "name": "The resource is in a state that does not permit this operation (invalid state transition).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "066e78c5-8299-40cd-9cd8-b47b9cfb04c2",
+          "name": "Cancel a campaign",
+          "request": {
+            "name": "Cancel a campaign",
+            "description": {
+              "content": "Cancel a campaign. Allowed unless the campaign is already in a terminal state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "campaigns",
+                ":agent_id",
+                ":campaign_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Unique identifier of the voice agent."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "campaign_id",
+                  "description": "(Required) Unique identifier of the campaign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be8fe03a-1388-4534-94ba-7de197454c9b",
+              "name": "Campaign cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b546375d-4397-4ae8-8bde-f3bb2b436e1c",
+              "name": "Missing or invalid X-API-Key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcf096b2-c1ff-48e4-a276-f366e1fb3011",
+              "name": "The resource is in a state that does not permit this operation (invalid state transition).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "campaigns",
+                    ":agent_id",
+                    ":campaign_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Unique identifier of the voice agent."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "campaign_id",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.samora.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "60a5b53e-0dbd-43ad-bb58-c18d3e3e37b3",
+    "name": "Samora AI Calls Campaigns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-to-server REST API for Samora AI multilingual voice agents. Trigger outbound calls, manage outbound calling campaigns and their scheduled recipients, and subscribe to real-time call events via webhooks. These APIs are intended for server-to-server integrations; the organization API key must never be exposed in browser or mobile clients.\n\nContact Support:\n Name: Samora AI API Support\n Email: vineeth@samora.ai",
+      "type": "text/plain"
+    }
+  }
+}

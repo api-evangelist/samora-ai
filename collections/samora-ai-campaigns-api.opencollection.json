@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Samora AI Calls Campaigns API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Campaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List campaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.samora.ai/v1/external/campaigns/:agent_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the voice agent."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of campaigns per page (max 100)."
+              }
+            ]
+          },
+          "docs": "List campaigns for an agent."
+        },
+        {
+          "info": {
+            "name": "Create a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.samora.ai/v1/external/campaigns/:agent_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the voice agent."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an outbound calling campaign for an agent."
+        },
+        {
+          "info": {
+            "name": "Get a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.samora.ai/v1/external/campaigns/:agent_id/:campaign_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the voice agent."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the campaign."
+              }
+            ]
+          },
+          "docs": "Get details for a specific campaign."
+        },
+        {
+          "info": {
+            "name": "Update a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.samora.ai/v1/external/campaigns/:agent_id/:campaign_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the voice agent."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the campaign."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update campaign settings."
+        },
+        {
+          "info": {
+            "name": "Add recipients to a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.samora.ai/v1/external/campaigns/:agent_id/:campaign_id/scheduled-calls",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the voice agent."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the campaign."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add scheduled-call recipients to a campaign. Up to 5000 numbers per request, with up to 4 KiB of call_variables per number. Only allowed while the campaign is in DRAFT or PAUSED status."
+        },
+        {
+          "info": {
+            "name": "List campaign calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.samora.ai/v1/external/campaigns/:agent_id/:campaign_id/calls",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the voice agent."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the campaign."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of calls per page (max 100)."
+              }
+            ]
+          },
+          "docs": "List the calls belonging to a campaign."
+        },
+        {
+          "info": {
+            "name": "Start a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.samora.ai/v1/external/campaigns/:agent_id/:campaign_id/start",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the voice agent."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the campaign."
+              }
+            ]
+          },
+          "docs": "Start a campaign. Allowed from DRAFT or PAUSED status."
+        },
+        {
+          "info": {
+            "name": "Stop a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.samora.ai/v1/external/campaigns/:agent_id/:campaign_id/stop",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the voice agent."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the campaign."
+              }
+            ]
+          },
+          "docs": "Stop a campaign. Allowed only from IN_PROGRESS status."
+        },
+        {
+          "info": {
+            "name": "Cancel a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.samora.ai/v1/external/campaigns/:agent_id/:campaign_id/cancel",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the voice agent."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the campaign."
+              }
+            ]
+          },
+          "docs": "Cancel a campaign. Allowed unless the campaign is already in a terminal state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

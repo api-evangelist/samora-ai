@@ -2,10 +2,9 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/samora-ai-openapi.yml
-note: >-
-  No official Samora AI MCP server was found. This is a candidate tool list
-  derived one-to-one from the documented REST operations, as a starting point
-  for an MCP wrapper. Auth would map the organization X-API-Key.
+note: No official Samora AI MCP server was found. This is a candidate tool list derived one-to-one from
+  the documented REST operations, as a starting point for an MCP wrapper. Auth would map the organization
+  X-API-Key.
 server:
   name: samora-ai
   transport: http
@@ -61,3 +60,9 @@ tools:
 - name: delete_webhook
   description: Delete a webhook subscription.
   source_operation: openapi/samora-ai-openapi.yml#deleteWebhook
+deployment:
+  mode: none
+  verified: derived
+  tools: 17
+  checked: '2026-08-12'
+  source: catalog MCP census
