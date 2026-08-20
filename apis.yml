@@ -43,6 +43,16 @@ tags:
 - Customer Communications
 - Contact Center
 - Campaigns
+- Webhook
+tags_raw:
+- Company
+- Voice Agents
+- Conversational AI
+- Voice AI
+- Telephony
+- Customer Communications
+- Contact Center
+- Campaigns
 - Webhooks
 maintainers:
 - FN: Kin Lane
@@ -84,6 +94,8 @@ apis:
   humanURL: https://docs.samora.ai
   baseURL: https://api.samora.ai
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
