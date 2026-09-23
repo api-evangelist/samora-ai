@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Samora AI Calls Campaigns API
+  title: Samora AI Campaigns API
   version: '1.0'
   description: Server-to-server REST API for Samora AI multilingual voice agents. Trigger outbound calls, manage outbound calling campaigns and their scheduled recipients, and subscribe to real-time call events via webhooks. These APIs are intended for server-to-server integrations; the organization API key must never be exposed in browser or mobile clients.
   contact:
@@ -225,24 +225,89 @@ paths:
         '409':
           $ref: '#/components/responses/Conflict'
 components:
-  parameters:
-    AgentId:
-      name: agent_id
-      in: path
-      required: true
-      description: Unique identifier of the voice agent.
-      schema:
-        type: string
-        format: uuid
-    CampaignId:
-      name: campaign_id
-      in: path
-      required: true
-      description: Unique identifier of the campaign.
-      schema:
-        type: string
-        format: uuid
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-API-Key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: The resource is in a state that does not permit this operation (invalid state transition).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    CallStatus:
+      type: string
+      enum:
+      - PENDING
+      - TRIGGERED
+      - ONGOING
+      - CALL_FINISHED
+      - UNANSWERED
+      - REJECTED
+    AddScheduledCallsRequest:
+      type: object
+      required:
+      - recipients
+      properties:
+        recipients:
+          type: array
+          maxItems: 5000
+          items:
+            type: object
+            required:
+            - to_number
+            properties:
+              to_number:
+                type: string
+                description: Destination phone number in E.164 format.
+              call_variables:
+                type: object
+                description: Per-recipient variables, up to 4 KiB per number.
+                additionalProperties: true
+    Call:
+      type: object
+      properties:
+        call_id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/CallStatus'
+        transcript_url:
+          type: string
+          format: uri
+          description: Presigned transcript URL, valid for 60 minutes.
+        recording_url:
+          type: string
+          format: uri
+          description: Presigned recording URL, valid for 60 minutes.
+    Campaign:
+      type: object
+      properties:
+        campaign_id:
+          type: string
+          format: uuid
+        campaign_name:
+          type: string
+        status:
+          $ref: '#/components/schemas/CampaignStatus'
+        retry_config:
+          $ref: '#/components/schemas/RetryConfig'
     RetryConfig:
       type: object
       properties:
@@ -273,22 +338,6 @@ components:
       - FINISHED
       - FAILED
       - CANCELLED
-    Call:
-      type: object
-      properties:
-        call_id:
-          type: string
-          format: uuid
-        status:
-          $ref: '#/components/schemas/CallStatus'
-        transcript_url:
-          type: string
-          format: uri
-          description: Presigned transcript URL, valid for 60 minutes.
-        recording_url:
-          type: string
-          format: uri
-          description: Presigned recording URL, valid for 60 minutes.
     Error:
       type: object
       properties:
@@ -296,47 +345,6 @@ components:
           type: string
         message:
           type: string
-    AddScheduledCallsRequest:
-      type: object
-      required:
-      - recipients
-      properties:
-        recipients:
-          type: array
-          maxItems: 5000
-          items:
-            type: object
-            required:
-            - to_number
-            properties:
-              to_number:
-                type: string
-                description: Destination phone number in E.164 format.
-              call_variables:
-                type: object
-                description: Per-recipient variables, up to 4 KiB per number.
-                additionalProperties: true
-    Campaign:
-      type: object
-      properties:
-        campaign_id:
-          type: string
-          format: uuid
-        campaign_name:
-          type: string
-        status:
-          $ref: '#/components/schemas/CampaignStatus'
-        retry_config:
-          $ref: '#/components/schemas/RetryConfig'
-    CallStatus:
-      type: string
-      enum:
-      - PENDING
-      - TRIGGERED
-      - ONGOING
-      - CALL_FINISHED
-      - UNANSWERED
-      - REJECTED
     CreateCampaignRequest:
       type: object
       required:
@@ -347,31 +355,23 @@ components:
           maxLength: 120
         retry_config:
           $ref: '#/components/schemas/RetryConfig'
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid X-API-Key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Conflict:
-      description: The resource is in a state that does not permit this operation (invalid state transition).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    CampaignId:
+      name: campaign_id
+      in: path
+      required: true
+      description: Unique identifier of the campaign.
+      schema:
+        type: string
+        format: uuid
+    AgentId:
+      name: agent_id
+      in: path
+      required: true
+      description: Unique identifier of the voice agent.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

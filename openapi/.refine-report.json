@@ -1,9 +1,7 @@
 {
   "provider": "samora-ai",
   "sources": [
-    "samora-ai-calls-api-openapi.yml",
-    "samora-ai-campaigns-api-openapi.yml",
-    "samora-ai-webhooks-api-openapi.yml"
+    "_original/samora-ai-openapi.yml"
   ],
   "outputs": [
     "samora-ai-calls-api-openapi.yml",
@@ -13,6 +11,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "samora-ai-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "samora-ai-calls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "samora-ai-campaigns-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "samora-ai-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
