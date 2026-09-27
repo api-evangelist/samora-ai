@@ -148,6 +148,13 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Webhook:
       type: object
       properties:
@@ -190,14 +197,13 @@ components:
           type: object
           description: Controls which data fields are included in webhook payloads.
           additionalProperties: true
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
   responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Missing or invalid X-API-Key.
       content:
@@ -206,12 +212,6 @@ components:
             $ref: '#/components/schemas/Error'
     BadRequest:
       description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
       content:
         application/json:
           schema:
