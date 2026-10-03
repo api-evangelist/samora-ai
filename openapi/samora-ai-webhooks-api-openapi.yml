@@ -148,13 +148,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     Webhook:
       type: object
       properties:
@@ -175,6 +168,13 @@ components:
         signing_secret:
           type: string
           description: Secret used to verify webhook payload signatures.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     CreateWebhookRequest:
       type: object
       required:
