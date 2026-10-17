@@ -226,14 +226,6 @@ paths:
           $ref: '#/components/responses/Conflict'
 components:
   parameters:
-    CampaignId:
-      name: campaign_id
-      in: path
-      required: true
-      description: Unique identifier of the campaign.
-      schema:
-        type: string
-        format: uuid
     AgentId:
       name: agent_id
       in: path
@@ -242,38 +234,22 @@ components:
       schema:
         type: string
         format: uuid
+    CampaignId:
+      name: campaign_id
+      in: path
+      required: true
+      description: Unique identifier of the campaign.
+      schema:
+        type: string
+        format: uuid
   schemas:
-    CallStatus:
-      type: string
-      enum:
-      - PENDING
-      - TRIGGERED
-      - ONGOING
-      - CALL_FINISHED
-      - UNANSWERED
-      - REJECTED
-    CreateCampaignRequest:
-      type: object
-      required:
-      - campaign_name
-      properties:
-        campaign_name:
-          type: string
-          maxLength: 120
-        retry_config:
-          $ref: '#/components/schemas/RetryConfig'
-    Campaign:
+    Error:
       type: object
       properties:
-        campaign_id:
+        error:
           type: string
-          format: uuid
-        campaign_name:
+        message:
           type: string
-        status:
-          $ref: '#/components/schemas/CampaignStatus'
-        retry_config:
-          $ref: '#/components/schemas/RetryConfig'
     RetryConfig:
       type: object
       properties:
@@ -294,6 +270,15 @@ components:
             - REJECTED
             - VOICEMAIL
             - FAILED
+    CallStatus:
+      type: string
+      enum:
+      - PENDING
+      - TRIGGERED
+      - ONGOING
+      - CALL_FINISHED
+      - UNANSWERED
+      - REJECTED
     CampaignStatus:
       type: string
       enum:
@@ -304,29 +289,6 @@ components:
       - FINISHED
       - FAILED
       - CANCELLED
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    Call:
-      type: object
-      properties:
-        call_id:
-          type: string
-          format: uuid
-        status:
-          $ref: '#/components/schemas/CallStatus'
-        transcript_url:
-          type: string
-          format: uri
-          description: Presigned transcript URL, valid for 60 minutes.
-        recording_url:
-          type: string
-          format: uri
-          description: Presigned recording URL, valid for 60 minutes.
     AddScheduledCallsRequest:
       type: object
       required:
@@ -347,15 +309,47 @@ components:
                 type: object
                 description: Per-recipient variables, up to 4 KiB per number.
                 additionalProperties: true
+    Campaign:
+      type: object
+      properties:
+        campaign_id:
+          type: string
+          format: uuid
+        campaign_name:
+          type: string
+        status:
+          $ref: '#/components/schemas/CampaignStatus'
+        retry_config:
+          $ref: '#/components/schemas/RetryConfig'
+    CreateCampaignRequest:
+      type: object
+      required:
+      - campaign_name
+      properties:
+        campaign_name:
+          type: string
+          maxLength: 120
+        retry_config:
+          $ref: '#/components/schemas/RetryConfig'
+    Call:
+      type: object
+      properties:
+        call_id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/CallStatus'
+        transcript_url:
+          type: string
+          format: uri
+          description: Presigned transcript URL, valid for 60 minutes.
+        recording_url:
+          type: string
+          format: uri
+          description: Presigned recording URL, valid for 60 minutes.
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
+    Unauthorized:
+      description: Missing or invalid X-API-Key.
       content:
         application/json:
           schema:
@@ -366,8 +360,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid X-API-Key.
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

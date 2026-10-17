@@ -147,46 +147,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid X-API-Key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Webhook:
-      type: object
-      properties:
-        webhook_id:
-          type: string
-          format: uuid
-        url:
-          type: string
-          format: uri
-        events:
-          type: array
-          items:
-            type: string
-            enum:
-            - CALL_STARTED
-            - CALL_FINISHED
-            - CALL_FAILED
-        signing_secret:
-          type: string
-          description: Secret used to verify webhook payload signatures.
     CreateWebhookRequest:
       type: object
       required:
@@ -216,6 +177,45 @@ components:
           type: string
         message:
           type: string
+    Webhook:
+      type: object
+      properties:
+        webhook_id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - CALL_STARTED
+            - CALL_FINISHED
+            - CALL_FAILED
+        signing_secret:
+          type: string
+          description: Secret used to verify webhook payload signatures.
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-API-Key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     WebhookId:
       name: webhook_id
