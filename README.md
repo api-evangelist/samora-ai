@@ -1,4 +1,4 @@
-# Samora Ai
+# Samora AI
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,6 +64,130 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Samora Ai is a company surfaced as a portfolio company of y-combinator and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Samora AI is a Y Combinator (W2026) company building multilingual voice agents that automate high-volume inbound and outbound calling for financial services, recruitment, healthcare, and government. Its agents handle natural conversation across 20+ languages with interruption handling, code-switching, and escalation to human operators, plus omnichannel support (voice, WhatsApp, SMS, email) and CRM integration. Samora exposes a server-to-server REST API to trigger outbound calls, manage outbound calling campaigns and their scheduled recipients, and subscribe to real-time call events through signed webhooks. Authentication is an organization API key sent in the X-API-Key header; the base URL is https://api.samora.ai and the developer documentation is at https://docs.samora.ai.
 
-Backed by: y-combinator
+**Areas:** Company · Voice Agents · Conversational AI · Voice AI · Telephony · Customer Communication · Contact Center · Campaigns · Webhook
+
+## Samora AI on APIs.io
+
+Everything profiled for Samora AI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/samora-ai/](https://apis.io/providers/samora-ai/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [Samora AI Calls API](https://apis.io/apis/samora-ai/samora-ai-calls-api/) — Trigger and retrieve individual outbound calls.
+- [Samora AI Campaigns API](https://apis.io/apis/samora-ai/samora-ai-campaigns-api/) — Create and manage outbound calling campaigns and their scheduled recipients.
+- [Samora AI Webhooks API](https://apis.io/apis/samora-ai/samora-ai-webhooks-api/) — Subscribe to real-time call events.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Samora AI Webhooks](https://apis.io/asyncapis/samora-ai/samora-ai-webhooks-asyncapi/)
+
+#### Event channels (1)
+
+Individual events and webhooks the provider emits.
+
+- [/](https://apis.io/channels/samora-ai/callevents/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [samora-ai](https://apis.io/servers/samora-ai/samora-ai/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Samora Ai Agentic Access](https://apis.io/agentic-access/samora-ai/samora-ai-agentic-access/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [Samora AI Calls API](https://apis.io/collections/samora-ai/open-samora-ai-calls-api/)
+- [Samora AI Calls Campaigns API](https://apis.io/collections/samora-ai/open-samora-ai-campaigns-api/)
+- [Samora AI Calls Webhooks API](https://apis.io/collections/samora-ai/open-samora-ai-webhooks-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Samora Ai Openapi Overlay](https://apis.io/overlays/samora-ai/samora-ai-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Samora Ai Authentication](https://apis.io/security/samora-ai/samora-ai-authentication/)
+- [Samora Ai Domain Security](https://apis.io/security/samora-ai/samora-ai-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://samora.ai)
+- [Documentation](https://docs.samora.ai)
+- [Getting started](https://docs.samora.ai)
+- [API reference](https://docs.samora.ai)
+- [Sign up](https://app.samora.ai/login)
+- [Support](https://cal.com/team/samora/quick-chat)
+- [Blog](https://samora.ai/blog/)
+
+## API Evangelist rating
+
+**Kin Score 26.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 25.7 |
+| Contract governance | 4.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 0.0 |
+
+**Agent readiness 21.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/samora-ai/](https://apis.io/providers/samora-ai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Samora AI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/samora-ai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
